@@ -1,5 +1,3 @@
-// index.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
@@ -9,7 +7,7 @@ const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'acne-capstone.appspot.com', // Nama bucket Firebase Anda (tanpa gs://)
+  storageBucket: 'acne-capstone.appspot.com',
   databaseURL: 'https://acne-capstone.firebaseio.com'
 });
 
@@ -40,7 +38,7 @@ app.use('/api/images', imagesRoute);
 app.use('/api/acne-detector', acneDetectorRoute); // Gunakan route baru ini
 
 // Server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
