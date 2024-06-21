@@ -1,18 +1,23 @@
-# Use the official Node.js image
-FROM node:14
+# Gunakan image node resmi sebagai base image
+FROM node:18
 
-# Create app directory
+# Buat direktori kerja di dalam container
 WORKDIR /usr/src/app
 
-# Install app dependencies
+# Salin package.json dan package-lock.json ke dalam direktori kerja
 COPY package*.json ./
-RUN npm install
 
-# Bundle app source
+# Install dependencies
+RUN npm install --only=production
+
+# Salin semua file dari proyek Anda ke dalam direktori kerja di container
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 3000
+# Gunakan environment variable untuk port
+ENV PORT 8080
 
-# Command to run the app
+# Expose port yang digunakan oleh aplikasi
+EXPOSE 8080
+
+# Jalankan aplikasi
 CMD ["node", "index.js"]
